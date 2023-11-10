@@ -1,6 +1,6 @@
 #this python project simulate an login system we know from websites
 
-#import re module for creating and checking mail and password patterns
+#import re module for checking mail and password patterns
 import re
 
 #mail_checker function for existing mail address and new mail addresses
@@ -13,7 +13,14 @@ def mail_checker():
 
 
 def pw_checker():
-    pw_pattern = ("^[a-zA-z0-9{1}\\.\\-]$")
+    pw_pattern = ("[a-zA-Z]{8,}[0-9]{3,}")
+    if re.search(pw_pattern, new_password):
+        print("Your password is valid.")
+    else:
+        print("Your password is invalid. Come back again with a valid password.")        
+            
+
+
 
 
 #welcome the user
@@ -54,5 +61,8 @@ else:
     #new password for the account
     new_password = input("Please type in a password for your account. ")
 
-
-    
+    #pw_checker function
+    pw_checker()
+    pw_confirm = input("Please type in your valid password again.")
+    if pw_confirm == new_password:
+        open("pwdb.txt", 'w').write(mail, new_password)
